@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 作業
+
+        // 用上面練習完成的 function 製作威力彩號碼產生器
+        // 將隨機出的數字用 document.write() 顯示在網頁上
+        // 威力彩規則
+
+        // A 區 1~38 取 6 個數字
+        // B 區 1~8 取 1 個數字
+
+        const randNum = (min, max , cnt) => {
+            let num = [];
+            cnt = (max-min) > cnt ? cnt: (max-min);
+            while(num.length < cnt){
+                let rand = min + Math.round( Math.random() * ( max - min ) );
+                if( num.includes(rand) ){
+                    continue;
+                }
+                num.push(rand);
+            }
+            
+            let again = confirm("還需要下一次取數字嗎?") ;
+            num.push(again);
+            return num ;
+        }
+
+        let area = 0;
+        let re   = true;
+        do{
+            let min = prompt("請輸入最小值") || 1  ;
+            let max = prompt("請輸入最大值") || 38 ;
+            let cnt = prompt("請輸入多少個") || 1  ;
+            
+            let numbers = randNum(parseInt(min),parseInt(max),parseInt(cnt));
+            re = numbers.pop();
+            // console.log("A".charCodeAt(0));  // 65
+            document.write(`第${String.fromCharCode(65+area)}區 (由${min}到${max}取${cnt}個數字) : ${numbers} <br> `);
+            area++ ;
+        }while(re);
+        
+        // 老師範例:可以用i--來控制重複數字的話的迴圈次數,也有模擬真實威力彩環境產生陣列抽球的方法
+
+        // for (let i = 0; i < 6; i++) {
+        //   const number = rand(1, 38)
+        //   if (!groupA.includes(number)) {
+        //     groupA.push(number)
+        //   } else {
+        //     i--
+        //   }
+        // }
+
+        // const numbers = []
+        // for (let i = 1; i <= 38; i++) {
+        //   numbers.push(i)
+        // }
+        // const numbers = Array.from({ length: 38 }, (value, index) => {
+        //     return index + 1
+        // })
+
+        // for (let i = 0; i < 6; i++) {
+        //     const index = rand(0, numbers.length - 1)
+        //     groupA.push(numbers[index])
+        //     numbers.splice(index, 1)
+        // }
+
+        // console.log(groupA)
+    </script>
+</body>
+</html>
